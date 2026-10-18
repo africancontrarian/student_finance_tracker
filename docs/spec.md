@@ -16,7 +16,7 @@ A single-page, framework-free web app (HTML, CSS, vanilla JS ES modules) that he
 3. As a student, I can search with a regex (with a case toggle) and see matches highlighted.
 4. As a student, I can sort the records by description, amount, category or date.
 5. As a student, I can see total records, total spending, top category and a 7-day trend.
-6. As a student, I can set a budget cap and be warned (politely when under, assertively when over).
+6. As a student, I can set a monthly budget cap and be warned (politely when under, assertively when over) based on this calendar month's spending.
 7. As a student, I can export/import my data as JSON and my data survives a page reload.
 8. As a student, I can switch display currency (ZAR, USD, EUR) and dark mode.
 
@@ -42,7 +42,7 @@ Amounts are stored in the **base currency (ZAR)**; display conversion is applied
 | `baseCurrency` | string | `ZAR` |
 | `currencies` | `{code: {symbol, rate}}` | ZAR 1, USD 0.055, EUR 0.051 (manual rates) |
 | `activeCurrency` | string | `ZAR` |
-| `budgetCap` | number (0 = off) | `0` |
+| `budgetCap` | number, per calendar month (0 = off) | `0` |
 | `darkMode` | boolean | `false` |
 
 ### Persistence
@@ -53,8 +53,8 @@ Amounts are stored in the **base currency (ZAR)**; display conversion is applied
 |---|-------|------|
 | 1 | Description | No leading/trailing space, no double spaces |
 | 2 | Amount | `0` or no leading zero, up to 2 decimals |
-| 3 | Date | `YYYY-MM-DD` shape |
-| 4 | Category | Letters, with single spaces or hyphens between words |
+| 3 | Date | `YYYY-MM-DD` shape, plus a calendar check that rejects impossible dates (e.g. `2026-02-31`) |
+| 4 | Category | Letters, with single spaces or hyphens between words; no leading/trailing space |
 | 5 | Advanced | Duplicate consecutive words via back-reference (warning, non-blocking) |
 
 The full pattern catalogue is in the README.
@@ -66,6 +66,7 @@ The full pattern catalogue is in the README.
 | `scripts/state.js` | Central state, pub/sub, CRUD, sort/search state, currency and cap settings |
 | `scripts/storage.js` | `localStorage` load/save, JSON export/import with validation |
 | `scripts/validators.js` | Regex validators |
+| `scripts/budget.js` | Pure helpers for month-scoped budget totals and local dates |
 | `scripts/search.js` | Safe regex compiler, match highlighting, HTML escaping |
 | `scripts/ui.js` | Rendering, event wiring, ARIA announcements |
 
@@ -89,6 +90,6 @@ Views: Dashboard, Records, Add, Settings, About. Mobile-first; breakpoints at 76
 | M2 | `index.html`, `styles/main.css` base layout |
 | M3 | `scripts/validators.js`, `tests.html` |
 | M4 | Render, sort, regex search (`search.js`, `ui.js`, `app.js`) |
-| M5 | Stats, budget cap, ARIA live updates (`state.js`) |
+| M5 | Stats, monthly budget cap, ARIA live updates (`state.js`, `budget.js`) |
 | M6 | Persistence, import/export, settings (`storage.js`, `seed.json`) |
 | M7 | Polish, a11y audit, README, demo video |

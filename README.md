@@ -12,7 +12,7 @@ A responsive, accessible, vanilla HTML/CSS/JavaScript web application for tracki
 - **Regex-powered search** with match highlighting and case-sensitivity toggle
 - **Sortable records table** — sort by description, amount, category, or date
 - **Dashboard** with total records, total spending, top category, and 7-day trend chart
-- **Budget cap** with ARIA live alerts (polite when under, assertive when over)
+- **Monthly budget cap** (current calendar month) with ARIA live alerts (polite when under, assertive when over)
 - **Multi-currency** support (ZAR, USD, EUR) with manual exchange rates
 - **JSON import/export** with structure validation
 - **Seed data** loader (12 sample records)
@@ -35,7 +35,8 @@ student-finance-tracker/
 │   ├── state.js        # Central state + pub/sub + CRUD
 │   ├── storage.js      # localStorage + JSON I/O
 │   ├── ui.js           # DOM rendering + event handling
-│   ├── validators.js   # Regex validation (5 rules)
+│   ├── validators.js   # Regex validation (5 rules + calendar check)
+│   ├── budget.js       # Month-scoped budget helpers + local date
 │   └── search.js       # Safe regex compiler + highlight
 ├── docs/
 │   ├── spec.md         # M1 spec, data model, a11y plan
@@ -51,7 +52,7 @@ student-finance-tracker/
 |---|---------|---------|---------------|
 | 1 | Description (no leading/trailing spaces) | `/^\S(?:.*\S)?$/` | `"Lunch at café"` ✅ / `" Lunch "` ❌ |
 | 2 | Amount (valid currency) | `/^(0\|[1-9]\d*)(\.\d{1,2})?$/` | `"12.50"` ✅ / `"012"` ❌ |
-| 3 | Date (YYYY-MM-DD) | `/^\d{4}-(0[1-9]\|1[0-2])-(0[1-9]\|[12]\d\|3[01])$/` | `"2026-10-14"` ✅ / `"14-10-2026"` ❌ |
+| 3 | Date (YYYY-MM-DD; shape checked by regex, then calendar-validated so `2026-02-31` is rejected) | `/^\d{4}-(0[1-9]\|1[0-2])-(0[1-9]\|[12]\d\|3[01])$/` | `"2026-10-14"` ✅ / `"14-10-2026"` ❌ |
 | 4 | Category (letters, spaces, hyphens only) | `/^[A-Za-z]+(?:[ -][A-Za-z]+)*$/` | `"Self-Care"` ✅ / `"Food1!"` ❌ |
 | 5 | **Advanced**: Duplicate consecutive words (back-reference) | `/\b(\w+)\s+\1\b/i` | `"and and"` ⚠️ warning |
 | 6 | Cents present (search) | `/\.\d{2}\b/` | `"12.50"` ✅ |
@@ -77,7 +78,7 @@ All interactive elements (nav links, sort headers, buttons, form controls) are f
 - **`aria-sort`** on sortable table headers
 - **`aria-label`** / `aria-describedby` on all interactive controls
 - **`role="status"`** and `role="alert"` for form errors
-- **Color contrast**: meets WCAG AA (dark text on light bg, light on dark in dark mode)
+- **Color contrast**: all text/surface pairs meet WCAG AA (≥ 4.5:1) in light and dark themes; ratios are tabulated in `docs/a11y-audit.md`
 - **Visible focus styles**: 2px solid accent outline with offset on all focusable elements
 - **Reduced motion**: a `prefers-reduced-motion: reduce` media query disables animations and transitions
 - **`<mark>`** highlighting preserves readability and contrast
