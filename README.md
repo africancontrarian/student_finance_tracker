@@ -37,7 +37,12 @@ student-finance-tracker/
 │   ├── ui.js           # DOM rendering + event handling
 │   ├── validators.js   # Regex validation (5 rules)
 │   └── search.js       # Safe regex compiler + highlight
-└── assets/             # (reserved for images/icons)
+├── docs/
+│   ├── spec.md         # M1 spec, data model, a11y plan
+│   ├── a11y-audit.md   # M7 accessibility audit
+│   └── demo-script.md  # Demo video outline
+└── assets/
+    └── wireframes/     # mobile.svg, desktop.svg
 ```
 
 ## 🔍 Regex Catalog
@@ -71,11 +76,27 @@ All interactive elements (nav links, sort headers, buttons, form controls) are f
 - **`aria-live` regions**: polite for status messages, assertive for budget overage alerts
 - **`aria-sort`** on sortable table headers
 - **`aria-label`** / `aria-describedby` on all interactive controls
-- **`role="status"`** and `role="alert"** for form errors
+- **`role="status"`** and `role="alert"` for form errors
 - **Color contrast**: meets WCAG AA (dark text on light bg, light on dark in dark mode)
 - **Visible focus styles**: 2px solid accent outline with offset on all focusable elements
-- **No motion preference**: uses `prefers-reduced-motion` (via CSS `transition` properties)
+- **Reduced motion**: a `prefers-reduced-motion: reduce` media query disables animations and transitions
 - **`<mark>`** highlighting preserves readability and contrast
+
+## Milestones
+
+| # | Milestone | Where |
+|---|-----------|-------|
+| M1 | Spec & wireframes | `docs/spec.md`, `assets/wireframes/` |
+| M2 | Semantic HTML & base CSS | `index.html`, `styles/main.css` |
+| M3 | Forms & regex validation | `scripts/validators.js`, `tests.html` |
+| M4 | Render, sort, regex search | `scripts/search.js`, `scripts/ui.js` |
+| M5 | Stats, cap & targets | `scripts/state.js`, dashboard in `ui.js` |
+| M6 | Persistence, import/export, settings | `scripts/storage.js`, `seed.json` |
+| M7 | Polish & a11y audit | `docs/a11y-audit.md`, this README |
+
+## Demo Video
+
+> **Link:** _paste the 2–3 minute demo video URL here_ (outline in `docs/demo-script.md`)
 
 ## Running Tests
 
