@@ -1,0 +1,110 @@
+[
+  {
+    "id": "txn_0001",
+    "description": "Lunch at cafeteria",
+    "amount": 12.50,
+    "category": "Food",
+    "date": "2026-10-10",
+    "createdAt": "2026-10-10T08:30:00Z",
+    "updatedAt": "2026-10-10T08:30:00Z"
+  },
+  {
+    "id": "txn_0002",
+    "description": "Chemistry textbook",
+    "amount": 89.99,
+    "category": "Books",
+    "date": "2026-10-08",
+    "createdAt": "2026-10-08T14:00:00Z",
+    "updatedAt": "2026-10-08T14:00:00Z"
+  },
+  {
+    "id": "txn_0003",
+    "description": "Monthly bus pass",
+    "amount": 45.00,
+    "category": "Transport",
+    "date": "2026-10-01",
+    "createdAt": "2026-10-01T07:00:00Z",
+    "updatedAt": "2026-10-01T07:00:00Z"
+  },
+  {
+    "id": "txn_0004",
+    "description": "Coffee with friends at campus cafe",
+    "amount": 8.75,
+    "category": "Entertainment",
+    "date": "2026-10-12",
+    "createdAt": "2026-10-12T16:30:00Z",
+    "updatedAt": "2026-10-12T16:30:00Z"
+  },
+  {
+    "id": "txn_0005",
+    "description": "Semester registration fees",
+    "amount": 1500.00,
+    "category": "Fees",
+    "date": "2026-09-15",
+    "createdAt": "2026-09-15T09:00:00Z",
+    "updatedAt": "2026-09-15T09:00:00Z"
+  },
+  {
+    "id": "txn_0006",
+    "description": "Stationery and and notebooks",
+    "amount": 35.49,
+    "category": "Books",
+    "date": "2026-10-05",
+    "createdAt": "2026-10-05T11:00:00Z",
+    "updatedAt": "2026-10-05T11:00:00Z"
+  },
+  {
+    "id": "txn_0007",
+    "description": "Movie night tickets",
+    "amount": 22.00,
+    "category": "Entertainment",
+    "date": "2026-10-11",
+    "createdAt": "2026-10-11T19:00:00Z",
+    "updatedAt": "2026-10-11T19:00:00Z"
+  },
+  {
+    "id": "txn_0008",
+    "description": "Uber to campus",
+    "amount": 0.99,
+    "category": "Transport",
+    "date": "2026-10-13",
+    "createdAt": "2026-10-13T06:45:00Z",
+    "updatedAt": "2026-10-13T06:45:00Z"
+  },
+  {
+    "id": "txn_0009",
+    "description": "Tea and snacks",
+    "amount": 5.25,
+    "category": "Food",
+    "date": "2026-10-14",
+    "createdAt": "2026-10-14T10:00:00Z",
+    "updatedAt": "2026-10-14T10:00:00Z"
+  },
+  {
+    "id": "txn_0010",
+    "description": "Gym membership fee",
+    "amount": 199.99,
+    "category": "Other",
+    "date": "2026-10-02",
+    "createdAt": "2026-10-02T08:00:00Z",
+    "updatedAt": "2026-10-02T08:00:00Z"
+  },
+  {
+    "id": "txn_0011",
+    "description": "Weekend groceries for dorm",
+    "amount": 67.30,
+    "category": "Food",
+    "date": "2026-10-06",
+    "createdAt": "2026-10-06T15:30:00Z",
+    "updatedAt": "2026-10-06T15:30:00Z"
+  },
+  {
+    "id": "txn_0012",
+    "description": "Programming reference book",
+    "amount": 250.00,
+    "category": "Books",
+    "date": "2026-09-28",
+    "createdAt": "2026-09-28T12:00:00Z",
+    "updatedAt": "2026-09-28T12:00:00Z"
+  }
+]
