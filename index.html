@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Student Finance Tracker — Track your spending, set budgets, and manage student finances with this accessible web app.">
+  <title>Student Finance Tracker</title>
+  <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <header class="app-header" role="banner">
+    <div class="header-inner">
+      <a href="#" class="app-logo" aria-label="Student Finance Tracker Home">
+        <span class="logo-icon" aria-hidden="true">💰</span>
+        <span>FinTracker</span>
+      </a>
+
+      <button class="menu-toggle" id="menu-toggle" aria-label="Open navigation menu" aria-expanded="false" aria-controls="nav-menu">
+        <span></span><span></span><span></span>
+      </button>
+
+      <nav aria-label="Main navigation">
+        <ul class="nav-menu" id="nav-menu" role="menubar">
+          <li role="none"><a href="#" data-view="dashboard" role="menuitem" class="active" aria-current="page"><span class="nav-icon" aria-hidden="true">📊</span> Dashboard</a></li>
+          <li role="none"><a href="#" data-view="records" role="menuitem"><span class="nav-icon" aria-hidden="true">📋</span> Records</a></li>
+          <li role="none"><a href="#" data-view="add" role="menuitem"><span class="nav-icon" aria-hidden="true">➕</span> Add</a></li>
+          <li role="none"><a href="#" data-view="settings" role="menuitem"><span class="nav-icon" aria-hidden="true">⚙️</span> Settings</a></li>
+          <li role="none"><a href="#" data-view="about" role="menuitem"><span class="nav-icon" aria-hidden="true">ℹ️</span> About</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="app-main" id="main-content" role="main">
+
+    <div id="status-announcer" role="status" aria-live="polite" class="sr-only"></div>
+
+    <section id="view-dashboard" class="view-section" aria-labelledby="dashboard-heading">
+      <div class="section-header">
+        <h2 id="dashboard-heading">Dashboard</h2>
+        <p>Your spending overview at a glance</p>
+      </div>
+
+      <div class="stats-grid">
+        <article class="card stat-card">
+          <span class="stat-icon" aria-hidden="true">📝</span>
+          <span class="stat-value" id="stat-total">0</span>
+          <span class="stat-label">Total Records</span>
+        </article>
+        <article class="card stat-card">
+          <span class="stat-icon" aria-hidden="true">💸</span>
+          <span class="stat-value" id="stat-spending">R0.00</span>
+          <span class="stat-label">Total Spending</span>
+        </article>
+        <article class="card stat-card">
+          <span class="stat-icon" aria-hidden="true">🏷️</span>
+          <span class="stat-value" id="stat-top-category">N/A</span>
+          <span class="stat-label">Top Category</span>
+        </article>
+      </div>
+
+      <div class="budget-section">
+        <div class="card budget-card">
+          <h3>📌 Budget Cap</h3>
+          <div class="budget-progress-track">
+            <div class="budget-progress-bar ok" id="budget-progress"
+                 role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"
+                 aria-label="Budget usage" style="width: 0%"></div>
+          </div>
+          <p class="budget-status neutral" id="budget-status" aria-live="polite">No budget cap set.</p>
+        </div>
+      </div>
+
+      <div class="chart-section">
+        <div class="card">
+          <h3>📈 Last 7 Days</h3>
+          <div id="trend-chart" aria-label="Spending trend chart"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="view-records" class="view-section" hidden aria-hidden="true" aria-labelledby="records-heading">
+      <div class="section-header">
+        <h2 id="records-heading">Transaction Records</h2>
+        <p>View, sort, search, and manage all your transactions</p>
+      </div>
+
+      <div class="records-toolbar">
+        <div class="search-bar">
+          <label for="search-input" class="sr-only">Search records (regex supported)</label>
+          <input type="text" id="search-input" placeholder="Search... (regex supported, e.g. /food|books/i)" aria-describedby="search-status">
+          <label for="search-case-toggle">
+            <input type="checkbox" id="search-case-toggle"> Case-sensitive
+          </label>
+        </div>
+        <div id="search-status" role="status" aria-live="polite"></div>
+      </div>
+
+      <div class="records-table-wrapper">
+        <table class="records-table" aria-label="Transaction records">
+          <thead>
+            <tr>
+              <th data-sort="description" tabindex="0" role="columnheader" aria-sort="none">Description <span class="sort-indicator"></span></th>
+              <th data-sort="amount" tabindex="0" role="columnheader" aria-sort="none">Amount <span class="sort-indicator"></span></th>
+              <th data-sort="category" tabindex="0" role="columnheader" aria-sort="none">Category <span class="sort-indicator"></span></th>
+              <th data-sort="date" tabindex="0" role="columnheader" aria-sort="none">Date <span class="sort-indicator"></span></th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="records-tbody">
+            <tr><td colspan="6" class="empty-message">No records yet. Add your first transaction!</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="view-add" class="view-section" hidden aria-hidden="true" aria-labelledby="add-heading">
+      <div class="section-header">
+        <h2 id="add-heading">Add Transaction</h2>
+        <p>Record a new expense</p>
+      </div>
+
+      <div class="card form-card">
+        <form id="add-record-form" novalidate>
+          <div class="form-group">
+            <label for="form-description">Description <span aria-hidden="true">*</span></label>
+            <input type="text" id="form-description" required
+                   placeholder="e.g. Lunch at cafeteria"
+                   aria-describedby="form-description-error"
+                   autocomplete="off">
+            <span id="form-description-error" class="form-error" role="alert"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="form-amount">Amount <span aria-hidden="true">*</span></label>
+            <input type="text" id="form-amount" required
+                   inputmode="decimal"
+                   placeholder="e.g. 12.50"
+                   aria-describedby="form-amount-error"
+                   autocomplete="off">
+            <span id="form-amount-error" class="form-error" role="alert"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="form-category">Category <span aria-hidden="true">*</span></label>
+            <select id="form-category" required class="category-select" aria-describedby="form-category-error">
+              <option value="Food">Food</option>
+              <option value="Books">Books</option>
+              <option value="Transport">Transport</option>
+              <option value="Entertainment">Entertainment</option>
+              <option value="Fees">Fees</option>
+              <option value="Other">Other</option>
+            </select>
+            <span id="form-category-error" class="form-error" role="alert"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="form-date">Date <span aria-hidden="true">*</span></label>
+            <input type="date" id="form-date" required
+                   aria-describedby="form-date-error">
+            <span id="form-date-error" class="form-error" role="alert"></span>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary">💾 Add Transaction</button>
+            <button type="reset" class="btn btn-secondary">Clear</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <section id="view-settings" class="view-section" hidden aria-hidden="true" aria-labelledby="settings-heading">
+      <div class="section-header">
+        <h2 id="settings-heading">Settings</h2>
+        <p>Configure currencies, categories, budget, and data</p>
+      </div>
+
+      <div class="settings-grid">
+
+        <div class="card settings-card">
+          <h3>💱 Currency</h3>
+          <div class="form-group">
+            <label for="settings-active-currency">Display Currency</label>
+            <select id="settings-active-currency">
+              <option value="ZAR" selected>ZAR</option>
+              <option value="USD">USD</option>
+              <option value="EUR">EUR</option>
+            </select>
+          </div>
+          <h4 style="font-size:0.85rem;color:var(--text-muted);margin-bottom:0.5rem;">Exchange Rates (to ZAR base)</h4>
+          <div id="currency-rates"></div>
+        </div>
+
+        <div class="card settings-card">
+          <h3>🎯 Budget Cap</h3>
+          <div class="form-group">
+            <label for="settings-budget-cap">Monthly Budget (in base currency)</label>
+            <input type="number" id="settings-budget-cap" min="0" step="1" placeholder="e.g. 5000">
+          </div>
+          <p style="font-size:0.8rem;color:var(--text-muted);">Set to 0 to disable. Overage alerts will appear on the dashboard.</p>
+        </div>
+
+        <div class="card settings-card">
+          <h3>🏷️ Categories</h3>
+          <div id="category-editor"></div>
+        </div>
+
+        <div class="card settings-card">
+          <h3>🎨 Appearance</h3>
+          <div class="toggle-row">
+            <label for="settings-dark-mode">Dark Mode</label>
+            <div class="toggle-switch">
+              <input type="checkbox" id="settings-dark-mode">
+              <span class="toggle-slider" aria-hidden="true"></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="card settings-card" style="grid-column: 1 / -1;">
+          <h3>📂 Data Management</h3>
+          <div class="io-buttons">
+            <button class="btn btn-primary" id="btn-export" aria-label="Export records as JSON">📥 Export JSON</button>
+            <button class="btn btn-secondary" id="btn-import" aria-label="Import records from JSON file">📤 Import JSON</button>
+            <input type="file" id="import-file" accept=".json" hidden aria-hidden="true">
+            <button class="btn btn-secondary" id="btn-load-seed" aria-label="Load sample seed data">🌱 Load Seed Data</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="view-about" class="view-section" hidden aria-hidden="true" aria-labelledby="about-heading">
+      <div class="section-header">
+        <h2 id="about-heading">About</h2>
+      </div>
+
+      <div class="card about-card">
+        <h3>Student Finance Tracker</h3>
+        <p>
+          A responsive, accessible vanilla HTML/CSS/JS web application designed to help students
+          track their daily expenses, manage budgets, and gain insights into their spending habits.
+        </p>
+        <br>
+        <h3>Features</h3>
+        <ul>
+          <li>Add, edit, and delete financial transactions</li>
+          <li>Regex-powered search with match highlighting</li>
+          <li>Sort records by description, amount, category, or date</li>
+          <li>Dashboard with spending statistics and 7-day trend chart</li>
+          <li>Budget cap with real-time ARIA live alerts</li>
+          <li>Multi-currency support (ZAR, USD, EUR) with manual rates</li>
+          <li>JSON import/export with validation</li>
+          <li>Dark mode toggle</li>
+          <li>Fully keyboard-navigable and screen-reader friendly</li>
+          <li>Mobile-first responsive design (360px → 768px → 1024px+)</li>
+        </ul>
+        <br>
+        <h3>Contact</h3>
+        <div class="contact-links">
+          <a href="https://github.com/africancontrarian" target="_blank" rel="noopener noreferrer">🔗 GitHub</a>
+          <a href="mailto:t.kambare@alustudent.com">📧 t.kambare@alustudent.com</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="app-footer" role="contentinfo">
+    <p>&copy; 2026 Student Finance Tracker. Built with vanilla HTML, CSS &amp; JavaScript.</p>
+  </footer>
+
+  <script type="module" src="scripts/app.js"></script>
+</body>
+</html>
