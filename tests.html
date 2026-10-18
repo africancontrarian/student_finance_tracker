@@ -131,6 +131,11 @@
         assert('Invalid: month 13 "2026-13-01"', !validateDate('2026-13-01').valid);
         assert('Invalid: day 32 "2026-01-32"', !validateDate('2026-01-32').valid);
         assert('Invalid: month 00 "2026-00-15"', !validateDate('2026-00-15').valid);
+        assert('Invalid: impossible date "2026-02-31"', !validateDate('2026-02-31').valid);
+        assert('Invalid: impossible date "2026-04-31"', !validateDate('2026-04-31').valid);
+        assert('Invalid: non-leap year "2025-02-29"', !validateDate('2025-02-29').valid);
+        assert('Valid: leap day "2024-02-29"', validateDate('2024-02-29').valid);
+        assert('Valid: last day of Feb "2026-02-28"', validateDate('2026-02-28').valid);
 
         section('Category Validation');
         assert('Valid: "Food"', validateCategory('Food').valid);
@@ -140,6 +145,7 @@
         assert('Invalid: numbers "Food1"', !validateCategory('Food1').valid);
         assert('Invalid: special chars "Food!"', !validateCategory('Food!').valid);
         assert('Invalid: starts with space " Food"', !validateCategory(' Food').valid);
+        assert('Invalid: trailing space "Food "', !validateCategory('Food ').valid);
 
         section('Duplicate Word Detection (Advanced Regex)');
         assert('Detects: "the the"', checkDuplicateWords('the the').hasDuplicate);

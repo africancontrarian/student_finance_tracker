@@ -29,6 +29,13 @@ export function validateAmount(value) {
 
 const DATE_RE = /^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/;
 
+// The regex checks the shape only; this rejects impossible dates such as 2026-02-31.
+function isRealCalendarDate(str) {
+    const [y, m, d] = str.split('-').map(Number);
+    const dt = new Date(Date.UTC(y, m - 1, d));
+    return dt.getUTCFullYear() === y && dt.getUTCMonth() === m - 1 && dt.getUTCDate() === d;
+}
+
 export function validateDate(value) {
     const str = String(value).trim();
     if (!str) {
@@ -37,15 +44,21 @@ export function validateDate(value) {
     if (!DATE_RE.test(str)) {
         return { valid: false, message: 'Date must be YYYY-MM-DD (e.g., 2026-10-14).' };
     }
+    if (!isRealCalendarDate(str)) {
+        return { valid: false, message: 'That date does not exist in the calendar.' };
+    }
     return { valid: true, message: '' };
 }
 
 const CATEGORY_RE = /^[A-Za-z]+(?:[ -][A-Za-z]+)*$/;
 
 export function validateCategory(value) {
-    const str = String(value).trim();
-    if (!str) {
+    const str = String(value);
+    if (!str.trim()) {
         return { valid: false, message: 'Category is required.' };
+    }
+    if (str !== str.trim()) {
+        return { valid: false, message: 'Category must not have leading or trailing spaces.' };
     }
     if (!CATEGORY_RE.test(str)) {
         return { valid: false, message: 'Category may only contain letters, spaces, and hyphens.' };
