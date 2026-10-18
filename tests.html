@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Finance Tracker — Tests</title>
+    <style>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0f0f1a;
+            color: #eaeaff;
+            padding: 2rem;
+            line-height: 1.6;
+        }
+
+        h1 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        h2 {
+            font-size: 1.1rem;
+            margin: 1.5rem 0 0.75rem;
+            color: #a29bfe;
+        }
+
+        .test {
+            padding: 0.5rem 0.75rem;
+            margin-bottom: 0.4rem;
+            border-radius: 6px;
+            font-size: 0.88rem;
+            font-family: monospace;
+        }
+
+        .pass {
+            background: rgba(0, 184, 148, 0.15);
+            color: #55efc4;
+            border-left: 3px solid #00b894;
+        }
+
+        .fail {
+            background: rgba(225, 112, 85, 0.15);
+            color: #fab1a0;
+            border-left: 3px solid #e17055;
+        }
+
+        .summary {
+            margin-top: 2rem;
+            padding: 1rem;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 1rem;
+        }
+
+        .summary.all-pass {
+            background: rgba(0, 184, 148, 0.2);
+            color: #55efc4;
+        }
+
+        .summary.some-fail {
+            background: rgba(225, 112, 85, 0.2);
+            color: #fab1a0;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>🧪 Student Finance Tracker — Test Suite</h1>
+    <div id="results"></div>
+    <div id="summary"></div>
+
+    <script type="module">
+        import { validateDescription, validateAmount, validateDate, validateCategory, checkDuplicateWords, validateRecord, PATTERNS } from './scripts/validators.js';
+        import { compileRegex, highlight, filterRecords, escapeHTML } from './scripts/search.js';
+
+        const results = document.getElementById('results');
+        const summaryEl = document.getElementById('summary');
+        let passed = 0, failed = 0;
+
+        function assert(testName, condition) {
+            const div = document.createElement('div');
+            div.className = `test ${condition ? 'pass' : 'fail'}`;
+            div.textContent = `${condition ? '✅ PASS' : '❌ FAIL'}: ${testName}`;
+            results.appendChild(div);
+            condition ? passed++ : failed++;
+        }
+
+        function section(name) {
+            const h2 = document.createElement('h2');
+            h2.textContent = name;
+            results.appendChild(h2);
+        }
+
+        section('Description Validation');
+        assert('Valid: "Lunch at cafeteria"', validateDescription('Lunch at cafeteria').valid);
+        assert('Valid: single char "A"', validateDescription('A').valid);
+        assert('Valid: "Coffee with friends"', validateDescription('Coffee with friends').valid);
+        assert('Invalid: empty string', !validateDescription('').valid);
+        assert('Invalid: leading space " Lunch"', !validateDescription(' Lunch').valid);
+        assert('Invalid: trailing space "Lunch "', !validateDescription('Lunch ').valid);
+        assert('Invalid: double spaces "Lunch  here"', !validateDescription('Lunch  here').valid);
+
+        section('Amount Validation');
+        assert('Valid: "12.50"', validateAmount('12.50').valid);
+        assert('Valid: "0"', validateAmount('0').valid);
+        assert('Valid: "100"', validateAmount('100').valid);
+        assert('Valid: "0.99"', validateAmount('0.99').valid);
+        assert('Valid: "1500"', validateAmount('1500').valid);
+        assert('Invalid: empty', !validateAmount('').valid);
+        assert('Invalid: leading zero "012"', !validateAmount('012').valid);
+        assert('Invalid: three decimals "1.123"', !validateAmount('1.123').valid);
+        assert('Invalid: negative "-5"', !validateAmount('-5').valid);
+        assert('Invalid: letters "abc"', !validateAmount('abc').valid);
+        assert('Invalid: dot only "."', !validateAmount('.').valid);
+
+        section('Date Validation');
+        assert('Valid: "2026-10-14"', validateDate('2026-10-14').valid);
+        assert('Valid: "2025-01-01"', validateDate('2025-01-01').valid);
+        assert('Valid: "2026-12-31"', validateDate('2026-12-31').valid);
+        assert('Invalid: empty', !validateDate('').valid);
+        assert('Invalid: wrong format "14-10-2026"', !validateDate('14-10-2026').valid);
+        assert('Invalid: month 13 "2026-13-01"', !validateDate('2026-13-01').valid);
+        assert('Invalid: day 32 "2026-01-32"', !validateDate('2026-01-32').valid);
+        assert('Invalid: month 00 "2026-00-15"', !validateDate('2026-00-15').valid);
+
+        section('Category Validation');
+        assert('Valid: "Food"', validateCategory('Food').valid);
+        assert('Valid: "Student Fees"', validateCategory('Student Fees').valid);
+        assert('Valid: "Self-Care"', validateCategory('Self-Care').valid);
+        assert('Invalid: empty', !validateCategory('').valid);
+        assert('Invalid: numbers "Food1"', !validateCategory('Food1').valid);
+        assert('Invalid: special chars "Food!"', !validateCategory('Food!').valid);
+        assert('Invalid: starts with space " Food"', !validateCategory(' Food').valid);
+
+        section('Duplicate Word Detection (Advanced Regex)');
+        assert('Detects: "the the"', checkDuplicateWords('the the').hasDuplicate);
+        assert('Detects: "and and notebooks"', checkDuplicateWords('Stationery and and notebooks').hasDuplicate);
+        assert('Detects: "very very good"', checkDuplicateWords('very very good').hasDuplicate);
+        assert('No dup: "the cat"', !checkDuplicateWords('the cat').hasDuplicate);
+        assert('No dup: "hello world"', !checkDuplicateWords('hello world').hasDuplicate);
+
+        section('Full Record Validation');
+        assert('Valid record', validateRecord({ description: 'Lunch', amount: '12.50', date: '2026-10-14', category: 'Food' }).valid);
+        assert('Invalid: bad desc + amount', !validateRecord({ description: ' bad', amount: 'abc', date: '2026-10-14', category: 'Food' }).valid);
+
+        section('compileRegex');
+        assert('Valid pattern returns RegExp', compileRegex('food') instanceof RegExp);
+        assert('Empty input returns null', compileRegex('') === null);
+        assert('Invalid pattern returns null', compileRegex('[invalid') === null);
+        assert('Case insensitive flag', compileRegex('food', 'i').flags.includes('i'));
+
+        section('highlight');
+        assert('Wraps match in <mark>', highlight('Lunch at cafeteria', /lunch/i).includes('<mark>'));
+        assert('No regex returns escaped text', highlight('Hello <world>', null) === 'Hello &lt;world&gt;');
+        assert('Escapes HTML in text', highlight('<script>', null) === '&lt;script&gt;');
+
+        section('filterRecords');
+        const testRecords = [
+            { id: '1', description: 'Coffee', category: 'Food', amount: 5, date: '2026-10-01' },
+            { id: '2', description: 'Bus ticket', category: 'Transport', amount: 10, date: '2026-10-02' },
+            { id: '3', description: 'Textbook', category: 'Books', amount: 50, date: '2026-10-03' },
+        ];
+        assert('Filters by description', filterRecords(testRecords, /coffee/i).length === 1);
+        assert('Filters by category', filterRecords(testRecords, /transport/i).length === 1);
+        assert('No match returns empty', filterRecords(testRecords, /xyz/).length === 0);
+        assert('No regex returns all', filterRecords(testRecords, null).length === 3);
+
+        section('escapeHTML');
+        assert('Escapes &', escapeHTML('a&b') === 'a&amp;b');
+        assert('Escapes <', escapeHTML('a<b') === 'a&lt;b');
+        assert('Escapes >', escapeHTML('a>b') === 'a&gt;b');
+
+        section('Finance-Specific Regex Patterns');
+        const centsRe = /\.\d{2}\b/;
+        assert('Cents present: "12.50" matches', centsRe.test('12.50'));
+        assert('Cents present: "100" no match', !centsRe.test('100'));
+
+        const beverageRe = /(coffee|tea)/i;
+        assert('Beverage: "Coffee" matches', beverageRe.test('Coffee'));
+        assert('Beverage: "Tea and snacks" matches', beverageRe.test('Tea and snacks'));
+        assert('Beverage: "Lunch" no match', !beverageRe.test('Lunch'));
+
+        const dupWordRe = /\b(\w+)\s+\1\b/;
+        assert('Dup word: "and and" matches', dupWordRe.test('and and'));
+        assert('Dup word: "the cat" no match', !dupWordRe.test('the cat'));
+
+        const total = passed + failed;
+        summaryEl.className = `summary ${failed === 0 ? 'all-pass' : 'some-fail'}`;
+        summaryEl.textContent = `${passed}/${total} tests passed${failed > 0 ? ` — ${failed} failed` : ' ✓ All green!'}`;
+    </script>
+</body>
+
+</html>
