@@ -1,0 +1,105 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 760" role="img" aria-labelledby="t d" font-family="Arial, Helvetica, sans-serif"><title id="t">Student Finance Tracker - desktop wireframes (1024px+)</title><desc id="d">Two desktop screens: Dashboard with a three-column stats grid, budget cap and 7-day chart; and Records with search bar and sortable table.</desc><rect width="1200" height="760" fill="#f4f4f8"/>
+<text x="20" y="26" font-size="16" font-weight="700" text-anchor="start" fill="#222">1. Dashboard</text>
+<rect x="20" y="36" width="570" height="700" rx="10" fill="#fff" stroke="#333" stroke-width="2"/>
+<rect x="20" y="36" width="570" height="50" rx="10" fill="#e6e6f2" stroke="#333" stroke-width="2"/>
+<text x="36" y="67" font-size="15" font-weight="700" text-anchor="start" fill="#222">Finance Tracker</text>
+<text x="230" y="67" font-size="11" font-weight="700" text-anchor="start" fill="#222">Dashboard</text>
+<text x="300" y="67" font-size="11" font-weight="400" text-anchor="start" fill="#222">Records</text>
+<text x="370" y="67" font-size="11" font-weight="400" text-anchor="start" fill="#222">Add</text>
+<text x="440" y="67" font-size="11" font-weight="400" text-anchor="start" fill="#222">Settings</text>
+<text x="510" y="67" font-size="11" font-weight="400" text-anchor="start" fill="#222">About</text>
+<text x="40" y="118" font-size="18" font-weight="700" text-anchor="start" fill="#222">Dashboard</text>
+<rect x="40" y="132" width="170" height="70" rx="6" fill="#f0f0fa" stroke="#555" stroke-width="1.5"/>
+<text x="54" y="162" font-size="16" font-weight="700" text-anchor="start" fill="#222">12</text>
+<text x="54" y="186" font-size="11" font-weight="400" text-anchor="start" fill="#555">Total Records</text>
+<rect x="220" y="132" width="170" height="70" rx="6" fill="#f0f0fa" stroke="#555" stroke-width="1.5"/>
+<text x="234" y="162" font-size="16" font-weight="700" text-anchor="start" fill="#222">R 1,240.50</text>
+<text x="234" y="186" font-size="11" font-weight="400" text-anchor="start" fill="#555">Total Spending</text>
+<rect x="400" y="132" width="170" height="70" rx="6" fill="#f0f0fa" stroke="#555" stroke-width="1.5"/>
+<text x="414" y="162" font-size="16" font-weight="700" text-anchor="start" fill="#222">Food</text>
+<text x="414" y="186" font-size="11" font-weight="400" text-anchor="start" fill="#555">Top Category</text>
+<rect x="40" y="222" width="265" height="150" rx="6" fill="#f7f7fc" stroke="#555" stroke-width="1.5"/>
+<text x="54" y="248" font-size="14" font-weight="700" text-anchor="start" fill="#222">Budget Cap</text>
+<rect x="54" y="262" width="237" height="16" rx="8" fill="#eee" stroke="#888" stroke-width="1.5"/>
+<rect x="54" y="262" width="150" height="16" rx="8" fill="#9aa5f0" stroke="#888" stroke-width="1.5"/>
+<text x="54" y="304" font-size="11" font-weight="400" text-anchor="start" fill="#444">R 760 remaining of R 2,000</text>
+<rect x="325" y="222" width="245" height="150" rx="6" fill="#f7f7fc" stroke="#555" stroke-width="1.5"/>
+<text x="339" y="248" font-size="14" font-weight="700" text-anchor="start" fill="#222">Last 7 Days</text>
+<rect x="342" y="320" width="20" height="30" rx="2" fill="#9aa5f0" stroke="#555" stroke-width="1.5"/>
+<rect x="372" y="295" width="20" height="55" rx="2" fill="#9aa5f0" stroke="#555" stroke-width="1.5"/>
+<rect x="402" y="325" width="20" height="25" rx="2" fill="#9aa5f0" stroke="#555" stroke-width="1.5"/>
+<rect x="432" y="280" width="20" height="70" rx="2" fill="#9aa5f0" stroke="#555" stroke-width="1.5"/>
+<rect x="462" y="305" width="20" height="45" rx="2" fill="#9aa5f0" stroke="#555" stroke-width="1.5"/>
+<rect x="492" y="335" width="20" height="15" rx="2" fill="#9aa5f0" stroke="#555" stroke-width="1.5"/>
+<rect x="522" y="300" width="20" height="50" rx="2" fill="#9aa5f0" stroke="#555" stroke-width="1.5"/>
+<rect x="40" y="392" width="530" height="120" rx="6" fill="#f7f7fc" stroke="#555" stroke-width="1.5"/>
+<text x="54" y="418" font-size="13" font-weight="700" text-anchor="start" fill="#222">Category breakdown (list with amounts)</text>
+<text x="610" y="26" font-size="16" font-weight="700" text-anchor="start" fill="#222">2. Records (sortable table)</text>
+<rect x="610" y="36" width="570" height="700" rx="10" fill="#fff" stroke="#333" stroke-width="2"/>
+<rect x="610" y="36" width="570" height="50" rx="10" fill="#e6e6f2" stroke="#333" stroke-width="2"/>
+<text x="626" y="67" font-size="15" font-weight="700" text-anchor="start" fill="#222">Finance Tracker</text>
+<text x="820" y="67" font-size="11" font-weight="400" text-anchor="start" fill="#222">Dashboard</text>
+<text x="890" y="67" font-size="11" font-weight="700" text-anchor="start" fill="#222">Records</text>
+<text x="960" y="67" font-size="11" font-weight="400" text-anchor="start" fill="#222">Add</text>
+<text x="1030" y="67" font-size="11" font-weight="400" text-anchor="start" fill="#222">Settings</text>
+<text x="1100" y="67" font-size="11" font-weight="400" text-anchor="start" fill="#222">About</text>
+<text x="630" y="118" font-size="18" font-weight="700" text-anchor="start" fill="#222">Transaction Records</text>
+<rect x="630" y="132" width="330" height="34" rx="4" fill="#fff" stroke="#555" stroke-width="1.5"/>
+<text x="640" y="154" font-size="12" font-weight="400" text-anchor="start" fill="#666">Search (regex): ^coffee|tea</text>
+<rect x="974" y="141" width="14" height="14" rx="2" fill="#fff" stroke="#555" stroke-width="1.5"/>
+<text x="996" y="153" font-size="11" font-weight="400" text-anchor="start" fill="#222">Case sensitive</text>
+<rect x="630" y="184" width="530" height="30" rx="0" fill="#e6e6f2" stroke="#555" stroke-width="1.5"/>
+<text x="640" y="204" font-size="12" font-weight="700" text-anchor="start" fill="#222">Description &#9650;</text>
+<text x="840" y="204" font-size="12" font-weight="700" text-anchor="start" fill="#222">Amount</text>
+<text x="920" y="204" font-size="12" font-weight="700" text-anchor="start" fill="#222">Category</text>
+<text x="1010" y="204" font-size="12" font-weight="700" text-anchor="start" fill="#222">Date</text>
+<text x="1090" y="204" font-size="12" font-weight="700" text-anchor="start" fill="#222">Actions</text>
+<rect x="630" y="214" width="530" height="34" rx="0" fill="#fff" stroke="#ccc" stroke-width="1"/>
+<text x="640" y="236" font-size="11" font-weight="400" text-anchor="start" fill="#222">Lunch at cafe</text>
+<text x="840" y="236" font-size="11" font-weight="400" text-anchor="start" fill="#222">R 12.50</text>
+<text x="920" y="236" font-size="11" font-weight="400" text-anchor="start" fill="#222">Food</text>
+<text x="1010" y="236" font-size="11" font-weight="400" text-anchor="start" fill="#222">2026-10-10</text>
+<text x="1090" y="236" font-size="11" font-weight="400" text-anchor="start" fill="#222">Edit | Del</text>
+<rect x="630" y="248" width="530" height="34" rx="0" fill="#f7f7fc" stroke="#ccc" stroke-width="1"/>
+<text x="640" y="270" font-size="11" font-weight="400" text-anchor="start" fill="#222">Lunch at cafe</text>
+<text x="840" y="270" font-size="11" font-weight="400" text-anchor="start" fill="#222">R 12.50</text>
+<text x="920" y="270" font-size="11" font-weight="400" text-anchor="start" fill="#222">Food</text>
+<text x="1010" y="270" font-size="11" font-weight="400" text-anchor="start" fill="#222">2026-10-10</text>
+<text x="1090" y="270" font-size="11" font-weight="400" text-anchor="start" fill="#222">Edit | Del</text>
+<rect x="630" y="282" width="530" height="34" rx="0" fill="#fff" stroke="#ccc" stroke-width="1"/>
+<text x="640" y="304" font-size="11" font-weight="400" text-anchor="start" fill="#222">Lunch at cafe</text>
+<text x="840" y="304" font-size="11" font-weight="400" text-anchor="start" fill="#222">R 12.50</text>
+<text x="920" y="304" font-size="11" font-weight="400" text-anchor="start" fill="#222">Food</text>
+<text x="1010" y="304" font-size="11" font-weight="400" text-anchor="start" fill="#222">2026-10-10</text>
+<text x="1090" y="304" font-size="11" font-weight="400" text-anchor="start" fill="#222">Edit | Del</text>
+<rect x="630" y="316" width="530" height="34" rx="0" fill="#f7f7fc" stroke="#ccc" stroke-width="1"/>
+<text x="640" y="338" font-size="11" font-weight="400" text-anchor="start" fill="#222">Lunch at cafe</text>
+<text x="840" y="338" font-size="11" font-weight="400" text-anchor="start" fill="#222">R 12.50</text>
+<text x="920" y="338" font-size="11" font-weight="400" text-anchor="start" fill="#222">Food</text>
+<text x="1010" y="338" font-size="11" font-weight="400" text-anchor="start" fill="#222">2026-10-10</text>
+<text x="1090" y="338" font-size="11" font-weight="400" text-anchor="start" fill="#222">Edit | Del</text>
+<rect x="630" y="350" width="530" height="34" rx="0" fill="#fff" stroke="#ccc" stroke-width="1"/>
+<text x="640" y="372" font-size="11" font-weight="400" text-anchor="start" fill="#222">Lunch at cafe</text>
+<text x="840" y="372" font-size="11" font-weight="400" text-anchor="start" fill="#222">R 12.50</text>
+<text x="920" y="372" font-size="11" font-weight="400" text-anchor="start" fill="#222">Food</text>
+<text x="1010" y="372" font-size="11" font-weight="400" text-anchor="start" fill="#222">2026-10-10</text>
+<text x="1090" y="372" font-size="11" font-weight="400" text-anchor="start" fill="#222">Edit | Del</text>
+<rect x="630" y="384" width="530" height="34" rx="0" fill="#f7f7fc" stroke="#ccc" stroke-width="1"/>
+<text x="640" y="406" font-size="11" font-weight="400" text-anchor="start" fill="#222">Lunch at cafe</text>
+<text x="840" y="406" font-size="11" font-weight="400" text-anchor="start" fill="#222">R 12.50</text>
+<text x="920" y="406" font-size="11" font-weight="400" text-anchor="start" fill="#222">Food</text>
+<text x="1010" y="406" font-size="11" font-weight="400" text-anchor="start" fill="#222">2026-10-10</text>
+<text x="1090" y="406" font-size="11" font-weight="400" text-anchor="start" fill="#222">Edit | Del</text>
+<rect x="630" y="418" width="530" height="34" rx="0" fill="#fff" stroke="#ccc" stroke-width="1"/>
+<text x="640" y="440" font-size="11" font-weight="400" text-anchor="start" fill="#222">Lunch at cafe</text>
+<text x="840" y="440" font-size="11" font-weight="400" text-anchor="start" fill="#222">R 12.50</text>
+<text x="920" y="440" font-size="11" font-weight="400" text-anchor="start" fill="#222">Food</text>
+<text x="1010" y="440" font-size="11" font-weight="400" text-anchor="start" fill="#222">2026-10-10</text>
+<text x="1090" y="440" font-size="11" font-weight="400" text-anchor="start" fill="#222">Edit | Del</text>
+<rect x="630" y="452" width="530" height="34" rx="0" fill="#f7f7fc" stroke="#ccc" stroke-width="1"/>
+<text x="640" y="474" font-size="11" font-weight="400" text-anchor="start" fill="#222">Lunch at cafe</text>
+<text x="840" y="474" font-size="11" font-weight="400" text-anchor="start" fill="#222">R 12.50</text>
+<text x="920" y="474" font-size="11" font-weight="400" text-anchor="start" fill="#222">Food</text>
+<text x="1010" y="474" font-size="11" font-weight="400" text-anchor="start" fill="#222">2026-10-10</text>
+<text x="1090" y="474" font-size="11" font-weight="400" text-anchor="start" fill="#222">Edit | Del</text>
+</svg>
