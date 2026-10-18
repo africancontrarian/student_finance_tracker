@@ -11,30 +11,30 @@
 
   <a href="#main-content" class="skip-link">Skip to main content</a>
 
-  <header class="app-header" role="banner">
+  <header class="app-header">
     <div class="header-inner">
       <a href="#" class="app-logo" aria-label="Student Finance Tracker Home">
         <span class="logo-icon" aria-hidden="true">💰</span>
         <span>FinTracker</span>
       </a>
 
-      <button class="menu-toggle" id="menu-toggle" aria-label="Open navigation menu" aria-expanded="false" aria-controls="nav-menu">
+      <button type="button" class="menu-toggle" id="menu-toggle" aria-label="Open navigation menu" aria-expanded="false" aria-controls="nav-menu">
         <span></span><span></span><span></span>
       </button>
 
       <nav aria-label="Main navigation">
-        <ul class="nav-menu" id="nav-menu" role="menubar">
-          <li role="none"><a href="#" data-view="dashboard" role="menuitem" class="active" aria-current="page"><span class="nav-icon" aria-hidden="true">📊</span> Dashboard</a></li>
-          <li role="none"><a href="#" data-view="records" role="menuitem"><span class="nav-icon" aria-hidden="true">📋</span> Records</a></li>
-          <li role="none"><a href="#" data-view="add" role="menuitem"><span class="nav-icon" aria-hidden="true">➕</span> Add</a></li>
-          <li role="none"><a href="#" data-view="settings" role="menuitem"><span class="nav-icon" aria-hidden="true">⚙️</span> Settings</a></li>
-          <li role="none"><a href="#" data-view="about" role="menuitem"><span class="nav-icon" aria-hidden="true">ℹ️</span> About</a></li>
+        <ul class="nav-menu" id="nav-menu">
+          <li><a href="#" data-view="dashboard" class="active" aria-current="page"><span class="nav-icon" aria-hidden="true">📊</span> Dashboard</a></li>
+          <li><a href="#" data-view="records"><span class="nav-icon" aria-hidden="true">📋</span> Records</a></li>
+          <li><a href="#" data-view="add"><span class="nav-icon" aria-hidden="true">➕</span> Add</a></li>
+          <li><a href="#" data-view="settings"><span class="nav-icon" aria-hidden="true">⚙️</span> Settings</a></li>
+          <li><a href="#" data-view="about"><span class="nav-icon" aria-hidden="true">ℹ️</span> About</a></li>
         </ul>
       </nav>
     </div>
   </header>
 
-  <main class="app-main" id="main-content" role="main">
+  <main class="app-main" id="main-content">
 
     <div id="status-announcer" role="status" aria-live="polite" class="sr-only"></div>
 
@@ -77,7 +77,7 @@
       <div class="chart-section">
         <div class="card">
           <h3>📈 Last 7 Days</h3>
-          <div id="trend-chart" aria-label="Spending trend chart"></div>
+          <div id="trend-chart"></div>
         </div>
       </div>
     </section>
@@ -103,11 +103,11 @@
         <table class="records-table" aria-label="Transaction records">
           <thead>
             <tr>
-              <th data-sort="description" tabindex="0" role="columnheader" aria-sort="none">Description <span class="sort-indicator"></span></th>
-              <th data-sort="amount" tabindex="0" role="columnheader" aria-sort="none">Amount <span class="sort-indicator"></span></th>
-              <th data-sort="category" tabindex="0" role="columnheader" aria-sort="none">Category <span class="sort-indicator"></span></th>
-              <th data-sort="date" tabindex="0" role="columnheader" aria-sort="none">Date <span class="sort-indicator"></span></th>
-              <th>Actions</th>
+              <th scope="col" data-sort="description" tabindex="0" aria-sort="none">Description <span class="sort-indicator"></span></th>
+              <th scope="col" data-sort="amount" tabindex="0" aria-sort="none">Amount <span class="sort-indicator"></span></th>
+              <th scope="col" data-sort="category" tabindex="0" aria-sort="none">Category <span class="sort-indicator"></span></th>
+              <th scope="col" data-sort="date" tabindex="0" aria-sort="none">Date <span class="sort-indicator"></span></th>
+              <th scope="col">Actions</th>
             </tr>
           </thead>
           <tbody id="records-tbody">
@@ -222,10 +222,10 @@
         <div class="card settings-card" style="grid-column: 1 / -1;">
           <h3>📂 Data Management</h3>
           <div class="io-buttons">
-            <button class="btn btn-primary" id="btn-export" aria-label="Export records as JSON">📥 Export JSON</button>
-            <button class="btn btn-secondary" id="btn-import" aria-label="Import records from JSON file">📤 Import JSON</button>
+            <button type="button" class="btn btn-primary" id="btn-export" aria-label="Export records as JSON">📥 Export JSON</button>
+            <button type="button" class="btn btn-secondary" id="btn-import" aria-label="Import records from JSON file">📤 Import JSON</button>
             <input type="file" id="import-file" accept=".json" hidden aria-hidden="true">
-            <button class="btn btn-secondary" id="btn-load-seed" aria-label="Load sample seed data">🌱 Load Seed Data</button>
+            <button type="button" class="btn btn-secondary" id="btn-load-seed" aria-label="Load sample seed data">🌱 Load Seed Data</button>
           </div>
         </div>
       </div>
@@ -267,7 +267,7 @@
 
   </main>
 
-  <footer class="app-footer" role="contentinfo">
+  <footer class="app-footer">
     <p>&copy; 2026 Student Finance Tracker. Built with vanilla HTML, CSS &amp; JavaScript.</p>
   </footer>
 
