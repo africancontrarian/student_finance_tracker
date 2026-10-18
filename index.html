@@ -68,7 +68,7 @@
           <div class="budget-progress-track">
             <div class="budget-progress-bar ok" id="budget-progress"
                  role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"
-                 aria-label="Budget usage" style="width: 0%"></div>
+                 aria-label="Budget usage"></div>
           </div>
           <p class="budget-status neutral" id="budget-status" aria-live="polite">No budget cap set.</p>
         </div>
@@ -92,7 +92,7 @@
         <div class="search-bar">
           <label for="search-input" class="sr-only">Search records (regex supported)</label>
           <input type="text" id="search-input" placeholder="Search... (regex supported, e.g. /food|books/i)" aria-describedby="search-status">
-          <label for="search-case-toggle">
+          <label>
             <input type="checkbox" id="search-case-toggle"> Case-sensitive
           </label>
         </div>
@@ -190,7 +190,7 @@
               <option value="EUR">EUR</option>
             </select>
           </div>
-          <h4 style="font-size:0.85rem;color:var(--text-muted);margin-bottom:0.5rem;">Exchange Rates (to ZAR base)</h4>
+          <h4 class="settings-subheading">Exchange Rates (to ZAR base)</h4>
           <div id="currency-rates"></div>
         </div>
 
@@ -200,7 +200,7 @@
             <label for="settings-budget-cap">Monthly Budget (in base currency)</label>
             <input type="number" id="settings-budget-cap" min="0" step="1" placeholder="e.g. 5000">
           </div>
-          <p style="font-size:0.8rem;color:var(--text-muted);">Set to 0 to disable. Overage alerts will appear on the dashboard.</p>
+          <p class="settings-hint">Set to 0 to disable. Overage alerts will appear on the dashboard.</p>
         </div>
 
         <div class="card settings-card">
@@ -219,7 +219,7 @@
           </div>
         </div>
 
-        <div class="card settings-card" style="grid-column: 1 / -1;">
+        <div class="card settings-card settings-card-wide">
           <h3>📂 Data Management</h3>
           <div class="io-buttons">
             <button type="button" class="btn btn-primary" id="btn-export" aria-label="Export records as JSON">📥 Export JSON</button>
