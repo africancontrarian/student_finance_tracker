@@ -1,3 +1,4 @@
+import { sumForMonth, localDateString } from './budget.js';
 import {
     getState, getRecords, getSettings, setView, setSort, setSearch,
     addRecord, updateRecord, deleteRecord, setEditing, setRecords,
@@ -59,12 +60,12 @@ function renderDashboard() {
     const topCatEl = $('stat-top-category');
     if (topCatEl) topCatEl.textContent = topCat ? `${topCat[0]} (${formatAmount(getDisplayAmount(topCat[1]))})` : 'N/A';
 
-    renderBudgetStatus(totalSpending);
+    renderBudgetStatus(sumForMonth(records));
 
     renderTrendChart(records);
 }
 
-function renderBudgetStatus(totalSpending) {
+function renderBudgetStatus(monthSpending) {
     const settings = getSettings();
     const cap = settings.budgetCap || 0;
     const statusEl = $('budget-status');
@@ -78,23 +79,23 @@ function renderBudgetStatus(totalSpending) {
     }
 
     const displayCap = getDisplayAmount(cap);
-    const displaySpent = getDisplayAmount(totalSpending);
-    const remaining = cap - totalSpending;
+    const displaySpent = getDisplayAmount(monthSpending);
+    const remaining = cap - monthSpending;
     const displayRemaining = getDisplayAmount(Math.abs(remaining));
 
     if (remaining >= 0) {
-        statusEl.textContent = `${formatAmount(displayRemaining)} remaining of ${formatAmount(displayCap)} budget.`;
+        statusEl.textContent = `${formatAmount(displayRemaining)} remaining of ${formatAmount(displayCap)} budget this month.`;
         statusEl.setAttribute('aria-live', 'polite');
         statusEl.className = 'budget-status under';
     } else {
-        statusEl.textContent = `Over budget by ${formatAmount(displayRemaining)}! Cap: ${formatAmount(displayCap)}.`;
+        statusEl.textContent = `Over budget this month by ${formatAmount(displayRemaining)}! Cap: ${formatAmount(displayCap)}.`;
         statusEl.setAttribute('aria-live', 'assertive');
         statusEl.className = 'budget-status over';
     }
 
     const progressEl = $('budget-progress');
     if (progressEl) {
-        const pct = Math.min((totalSpending / cap) * 100, 100);
+        const pct = Math.min((monthSpending / cap) * 100, 100);
         progressEl.style.width = `${pct}%`;
         progressEl.className = `budget-progress-bar ${remaining < 0 ? 'over' : pct > 75 ? 'warn' : 'ok'}`;
         progressEl.setAttribute('aria-valuenow', Math.round(pct));
@@ -390,7 +391,7 @@ function clearFormErrors() {
 function setTodayDate() {
     const dateInput = $('form-date');
     if (dateInput && !dateInput.value) {
-        dateInput.value = new Date().toISOString().slice(0, 10);
+        dateInput.value = localDateString();
     }
 }
 

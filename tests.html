@@ -81,6 +81,7 @@
     <script type="module">
         import { validateDescription, validateAmount, validateDate, validateCategory, checkDuplicateWords, validateRecord, PATTERNS } from './scripts/validators.js';
         import { compileRegex, highlight, filterRecords, escapeHTML } from './scripts/search.js';
+        import { monthKey, localDateString, sumForMonth } from './scripts/budget.js';
 
         const results = document.getElementById('results');
         const summaryEl = document.getElementById('summary');
@@ -184,6 +185,22 @@
         assert('Escapes &', escapeHTML('a&b') === 'a&amp;b');
         assert('Escapes <', escapeHTML('a<b') === 'a&lt;b');
         assert('Escapes >', escapeHTML('a>b') === 'a&gt;b');
+
+        section('Monthly Budget Helpers');
+        const oct5 = new Date(2026, 9, 5, 0, 30);
+        assert('localDateString uses local date parts', localDateString(oct5) === '2026-10-05');
+        assert('monthKey returns YYYY-MM', monthKey(oct5) === '2026-10');
+        assert('monthKey pads single-digit months', monthKey(new Date(2026, 0, 31)) === '2026-01');
+        const budgetRecords = [
+            { amount: 10, date: '2026-10-01' },
+            { amount: 20.5, date: '2026-10-31' },
+            { amount: 100, date: '2026-09-30' },
+            { amount: 7, date: '2025-10-15' },
+        ];
+        assert('sumForMonth adds only that month', sumForMonth(budgetRecords, '2026-10') === 30.5);
+        assert('sumForMonth ignores other months/years', sumForMonth(budgetRecords, '2026-09') === 100);
+        assert('sumForMonth of empty list is 0', sumForMonth([], '2026-10') === 0);
+        assert('sumForMonth with no matches is 0', sumForMonth(budgetRecords, '2027-01') === 0);
 
         section('Finance-Specific Regex Patterns');
         const centsRe = /\.\d{2}\b/;
